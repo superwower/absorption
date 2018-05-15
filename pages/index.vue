@@ -1,48 +1,67 @@
 <template>
-  <section class="container">
-    <img src="~assets/img/logo.png" alt="Nuxt.js Logo" class="logo" />
-    <h1 class="title">
-      USERS
-    </h1>
-    <ul class="users">
-      <li v-for="(user, index) in users" :key="index" class="user">
-        <nuxt-link :to="{ name: 'id', params: { id: index }}">
-          {{ user.name }}
-        </nuxt-link>
-      </li>
-    </ul>
-  </section>
+  <div>
+    <div class="hero is-primary">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title">
+            Primary title
+          </h1>
+          <h2 class="subtitle">
+            Primary subtitle
+          </h2>
+        </div>
+      </div>
+    </div>
+    <div class="columns is-mobile">
+      <div class="column">
+        <div class="card" v-for="(card, index) in cards" :key="index">
+          <div class="card-content">
+            <p class="subtitle">
+              {{ card.content }}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="card" v-for="(card, index) in cards" :key="index">
+          <div class="card-content">
+            <p class="subtitle">
+              {{ card.content }}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="card" v-for="(card, index) in cards" :key="index">
+          <div class="card-content">
+            <p class="subtitle">
+              {{ card.content }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
 import axios from '~/plugins/axios'
 
 export default {
+  data () {
+    return { cards: [] }
+  },
   async asyncData () {
-    let { data } = await axios.get('/api/users')
-    return { users: data }
+    let { data } = await axios.get('/api/cards')
+    return { cards: data }
   },
   head () {
     return {
-      title: 'Users'
+      title: 'Retrospective board'
     }
   }
 }
 </script>
 
 <style scoped>
-.title
-{
-  margin: 30px 0;
-}
-.users
-{
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.user
-{
-  margin: 10px 0;
-}
 </style>
