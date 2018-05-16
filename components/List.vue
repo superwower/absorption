@@ -1,12 +1,25 @@
 <template>
   <div class="column">
-    <section class="hero is-dark">
+    <div class="hero is-dark">
       <div class="hero-body">
         <h1 class="title">
           {{ title }}
         </h1>
       </div>
-    </section>
+    </div>
+    <div class="card">
+      <div class="box">
+        <textarea class="textarea" placeholder="e.g. Hello world"></textarea>
+        <nav class="level">
+          <div class="level-left"/>
+          <div class="level-right">
+            <p class="level-item">
+              <a class="button is-dark" :click="addCard">Add Card</a>
+            </p>
+          </div>
+        </nav>
+      </div>
+    </div>
     <div class="card" v-for="(card, index) in cards" :key="index">
       <div class="card-content">
         <p class="subtitle">
@@ -19,6 +32,18 @@
 
 <script>
 export default {
-  props: ['title', 'cards']
+  props: ['title', 'cards'],
+  methods: {
+    addCard: () => {
+    }
+  }
 }
 </script>
+
+<style scoped>
+
+.button
+{
+  margin-top: 10px;
+}
+</style>

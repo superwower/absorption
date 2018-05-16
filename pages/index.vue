@@ -1,11 +1,11 @@
 <template>
   <div>
     <div class="columns section">
-      <List title="KEEP"
+      <List title="keep"
             :cards="cards.keep" />
-      <List title="PROBLEM"
+      <List title="problem"
             :cards="cards.problem" />
-      <List title="TRY"
+      <List title="try"
             :cards="cards.try" />
     </div>
   </div>
