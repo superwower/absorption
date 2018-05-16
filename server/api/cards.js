@@ -18,9 +18,9 @@ router.get('/cards', function (req, res, next) {
   res.json(cards)
 })
 
-/* GET cards listing. */
+/* POST card.  */
 router.post('/cards', function (req, res, next) {
-  cards.push(req.json)
+  cards.push(req.body)
   res.status(200)
 })
 

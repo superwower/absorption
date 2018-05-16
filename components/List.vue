@@ -31,8 +31,10 @@
 </template>
 
 <script>
+import axios from '~/plugins/axios'
+
 export default {
-  props: ['title', 'cards'],
+  props: ['listId', 'title', 'cards'],
   data () {
     return {
       newcontent: ''
@@ -43,7 +45,9 @@ export default {
       if (this.newcontent === '') {
         return
       }
-      this.cards.push({ type: 'KEEP', content: this.newcontent })
+      const newCard = { listId: this.listId, content: this.newcontent }
+      this.cards.push(newCard)
+      axios.post('/api/cards', newCard)
       this.newcontent = ''
     }
   }

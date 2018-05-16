@@ -2,6 +2,7 @@
   <div>
     <div class="columns section">
       <List :title="index"
+            :listId="index"
             :cards="cards"
             v-for="(cards, index) in cards" :key="index"/>
     </div>
