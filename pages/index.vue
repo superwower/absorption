@@ -1,12 +1,9 @@
 <template>
   <div>
     <div class="columns section">
-      <List title="keep"
-            :cards="cards.keep" />
-      <List title="problem"
-            :cards="cards.problem" />
-      <List title="try"
-            :cards="cards.try" />
+      <List :title="index"
+            :cards="cards"
+            v-for="(cards, index) in cards" :key="index"/>
     </div>
   </div>
 </template>
@@ -21,8 +18,14 @@ export default {
   },
   async asyncData () {
     let { data } = await axios.get('/api/cards')
-    console.log(data)
-    return { cards: data }
+    let cards = {}
+    data.forEach(card => {
+      if (!cards[card.listId]) {
+        cards[card.listId] = []
+      }
+      cards[card.listId].push(card)
+    })
+    return { cards }
   },
   head () {
     return {

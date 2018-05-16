@@ -9,12 +9,12 @@
     </div>
     <div class="card">
       <div class="box">
-        <textarea class="textarea" placeholder="e.g. Hello world"></textarea>
+        <textarea class="textarea" placeholder="input content here" v-model="newcontent"></textarea>
         <nav class="level">
           <div class="level-left"/>
           <div class="level-right">
             <p class="level-item">
-              <a class="button is-dark" :click="addCard">Add Card</a>
+              <a class="button is-dark" @click="addCard">Add Card</a>
             </p>
           </div>
         </nav>
@@ -33,8 +33,18 @@
 <script>
 export default {
   props: ['title', 'cards'],
+  data () {
+    return {
+      newcontent: ''
+    }
+  },
   methods: {
-    addCard: () => {
+    addCard: function () {
+      if (this.newcontent === '') {
+        return
+      }
+      this.cards.push({ type: 'KEEP', content: this.newcontent })
+      this.newcontent = ''
     }
   }
 }
