@@ -14,24 +14,28 @@
           <div class="level-left"/>
           <div class="level-right">
             <p class="level-item">
-              <a class="button is-dark" @click="addCard">Add Card</a>
+              <a class="button is-dark is-rounded" @click="addCard">Add Card</a>
             </p>
           </div>
         </nav>
       </div>
     </div>
     <div class="card" v-for="(card, index) in cards" :key="index">
-      <div class="card-content">
-        <p class="subtitle">
+      <header class="card-header">
+        <p class="card-header-title">
           {{ card.content }}
         </p>
-      </div>
+        <a @click="removeCard(card, index)" class="card-header-icon">
+          <span class="delete "/>
+        </a>
+      </header>
     </div>
   </div>
 </template>
 
 <script>
 import axios from '~/plugins/axios'
+import uuid from 'uuid/v1'
 
 export default {
   props: ['listId', 'title', 'cards'],
@@ -45,17 +49,21 @@ export default {
       if (this.newcontent === '') {
         return
       }
-      const newCard = { listId: this.listId, content: this.newcontent }
+      const id = uuid()
+      const newCard = { id, listId: this.listId, content: this.newcontent }
       this.cards.push(newCard)
       axios.post('/api/cards', newCard)
       this.newcontent = ''
+    },
+    removeCard: function (card, index) {
+      this.cards.splice(index, 1)
+      axios.delete(`/api/cards/${card.id}`)
     }
   }
 }
 </script>
 
 <style scoped>
-
 .button
 {
   margin-top: 10px;

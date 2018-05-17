@@ -1,16 +1,17 @@
 import { Router } from 'express'
+import _ from 'lodash'
 
 const router = Router()
 
 // Mock Cards
 const cards = [
-  { listId: 'keep', content: '1st keep item' },
-  { listId: 'keep', content: '2nd keep item' },
-  { listId: 'problem', content: '1st problem item' },
-  { listId: 'problem', content: '2nd problem item' },
-  { listId: 'problem', content: '3rd problem item' },
-  { listId: 'try', content: '1st try item' },
-  { listId: 'try', content: '2nd try item' }
+  { id: '1', listId: 'keep', content: '1st keep item' },
+  { id: '2', listId: 'keep', content: '2nd keep item' },
+  { id: '3', listId: 'problem', content: '1st problem item' },
+  { id: '4', listId: 'problem', content: '2nd problem item' },
+  { id: '5', listId: 'problem', content: '3rd problem item' },
+  { id: '6', listId: 'try', content: '1st try item' },
+  { id: '7', listId: 'try', content: '2nd try item' }
 ]
 
 /* GET cards listing. */
@@ -21,7 +22,14 @@ router.get('/cards', function (req, res, next) {
 /* POST card.  */
 router.post('/cards', function (req, res, next) {
   cards.push(req.body)
-  res.status(200)
+  res.sendStatus(200)
 })
 
+/* DELETE card.  */
+router.delete('/cards/:id', function (req, res, next) {
+  _.remove(cards, function(card) {
+    return card.id === req.params.id;
+  });
+  res.sendStatus(200)
+})
 export default router
