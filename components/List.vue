@@ -1,5 +1,5 @@
 <template>
-  <draggable :options="{draggable:'.item'}" class="column">
+  <draggable :options="{draggable:'.item'}" class="column" @start="onDragStart" @end="onDragEnd">
     <div class="hero is-dark">
       <div class="hero-body">
         <h1 class="title">
@@ -62,6 +62,12 @@ export default {
     removeCard: function (card, index) {
       this.cards.splice(index, 1)
       axios.delete(`/api/cards/${card.id}`)
+    },
+    onDragStart: function (event) {
+      event.item.style.opacity = '0.4'
+    },
+    onDragEnd: function (event) {
+      event.item.style.opacity = '1'
     }
   }
 }
