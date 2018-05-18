@@ -5,13 +5,13 @@ const router = Router()
 
 // Mock Cards
 const cards = [
-  { id: '1', listId: 'keep', content: '1st keep item' },
-  { id: '2', listId: 'keep', content: '2nd keep item' },
-  { id: '3', listId: 'problem', content: '1st problem item' },
-  { id: '4', listId: 'problem', content: '2nd problem item' },
-  { id: '5', listId: 'problem', content: '3rd problem item' },
-  { id: '6', listId: 'try', content: '1st try item' },
-  { id: '7', listId: 'try', content: '2nd try item' }
+  { id: '1', order: 1, listId: 'keep', content: '1st keep item' },
+  { id: '2', order: 2, listId: 'keep', content: '2nd keep item' },
+  { id: '3', order: 1, listId: 'problem', content: '1st problem item' },
+  { id: '4', order: 2, listId: 'problem', content: '2nd problem item' },
+  { id: '5', order: 3, listId: 'problem', content: '3rd problem item' },
+  { id: '6', order: 1, listId: 'try', content: '1st try item' },
+  { id: '7', order: 2, listId: 'try', content: '2nd try item' }
 ]
 
 /* GET cards listing. */

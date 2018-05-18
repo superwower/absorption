@@ -1,5 +1,5 @@
 <template>
-  <div class="column">
+  <draggable :options="{draggable:'.item'}" class="column">
     <div class="hero is-dark">
       <div class="hero-body">
         <h1 class="title">
@@ -20,7 +20,7 @@
         </nav>
       </div>
     </div>
-    <div class="card" v-for="(card, index) in cards" :key="index">
+    <div class="card item" v-for="(card, index) in cards" :key="index">
       <header class="card-header">
         <p class="card-header-title">
           {{ card.content }}
@@ -30,14 +30,18 @@
         </a>
       </header>
     </div>
-  </div>
+  </draggable>
 </template>
 
 <script>
 import axios from '~/plugins/axios'
 import uuid from 'uuid/v1'
+import draggable from 'vuedraggable'
 
 export default {
+  components: {
+    draggable
+  },
   props: ['listId', 'title', 'cards'],
   data () {
     return {
