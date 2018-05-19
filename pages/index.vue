@@ -5,6 +5,7 @@
             :listId="index"
             :cards="cards"
             v-for="(cards, index) in cards" :key="index"/>
+      <b-icon icon="table-column-plus-before" />
     </div>
   </div>
 </template>
