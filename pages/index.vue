@@ -1,9 +1,9 @@
 <template>
-  <draggable :options="{draggable:'.item', group:'list'}" class="columns section" @start="onDragStart" @end="onDragEnd">
+  <draggable :options="{draggable:'.list', group:'list'}" class="columns section" @start="onDragStart" @end="onDragEnd">
       <List :title="index"
             :listId="index"
             :cards="cards"
-            v-for="(cards, index) in cards" :key="index" class="item"/>
+            v-for="(cards, index) in cards" :key="index" class="list"/>
       <b-icon icon="table-column-plus-before" />
   </draggable>
 </template>
