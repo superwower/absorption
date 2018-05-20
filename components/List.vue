@@ -20,7 +20,7 @@
         </nav>
       </div>
     </div>
-    <draggable :options="{draggable:'.item', group:'card'}" @start="onDragStart" @end="onDragEnd">
+    <draggable :options="{draggable:'.item', group:'card'}" @start="onDragStart" @end="onDragEnd" class="draggable">
       <div class="card item" v-for="(card, index) in cards" :key="index">
         <header class="card-header">
           <p class="card-header-title">
@@ -79,5 +79,10 @@ export default {
 .button
 {
   margin-top: 10px;
+}
+
+.draggable
+{
+  min-height: 100px;
 }
 </style>
