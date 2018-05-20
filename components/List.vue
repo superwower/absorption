@@ -1,5 +1,5 @@
 <template>
-  <draggable :options="{draggable:'.item'}" class="column" @start="onDragStart" @end="onDragEnd">
+  <div class="column">
     <div class="hero is-dark">
       <div class="hero-body">
         <h1 class="title">
@@ -20,17 +20,19 @@
         </nav>
       </div>
     </div>
-    <div class="card item" v-for="(card, index) in cards" :key="index">
-      <header class="card-header">
-        <p class="card-header-title">
-          {{ card.content }}
-        </p>
-        <a @click="removeCard(card, index)" class="card-header-icon">
-          <span class="delete "/>
-        </a>
-      </header>
-    </div>
-  </draggable>
+    <draggable :options="{draggable:'.item', group:'card'}" @start="onDragStart" @end="onDragEnd">
+      <div class="card item" v-for="(card, index) in cards" :key="index">
+        <header class="card-header">
+          <p class="card-header-title">
+            {{ card.content }}
+          </p>
+          <a @click="removeCard(card, index)" class="card-header-icon">
+            <span class="delete "/>
+          </a>
+        </header>
+      </div>
+    </draggable>
+  </div>
 </template>
 
 <script>
