@@ -9,7 +9,7 @@
         </a>
       </div>
     </nav>
-    <draggable :options="{draggable:'.list', group:'list'}" class="columns" @start="onDragStart" @end="onDragEnd">
+    <draggable :list="lists" :options="{draggable:'.list', group:'list'}" class="columns" @start="onDragStart" @end="onDragEnd" @change="moveList">
         <List :title="list.title"
               :listId="list.id"
               :cards="cards[list.id]"
@@ -68,6 +68,14 @@ export default {
       this.cards[newList.id] = []
       axios.post('/api/lists', newList)
       this.listTitle = ''
+    },
+    moveList: function (event) {
+      for (let key in this.lists) {
+        this.lists[key].order = key
+        if (event.moved.newIndex >= key) {
+          axios.put('/api/lists/' + this.lists[key].id, this.lists[key])
+        }
+      }
     },
     onDragStart: function (event) {
       event.item.style.opacity = '0.4'

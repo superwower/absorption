@@ -21,6 +21,11 @@ router.post('/lists', function (req, res, next) {
   res.sendStatus(200)
 })
 
+/* PUT list.  */
+router.put('/lists/:id', function (req, res, next) {
+  res.sendStatus(200)
+})
+
 /* DELETE list.  */
 router.delete('/lists/:id', function (req, res, next) {
   _.remove(lists, function (list) {
