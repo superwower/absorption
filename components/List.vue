@@ -5,6 +5,9 @@
         <h1 class="title">
           {{ title }}
         </h1>
+        <a @click="$emit('remove-list', listId)" style="position: absolute; right:10px; top:10px;">
+          <span class="delete "/>
+        </a>
       </div>
     </div>
     <div class="card">

@@ -13,6 +13,7 @@
         <List :title="list.title"
               :listId="list.id"
               :cards="cards[list.id]"
+              v-on:remove-list="removeList"
               v-for="(list, index) in lists" :key="index" class="list"/>
     </draggable>
   </div>
@@ -76,6 +77,15 @@ export default {
           axios.put('/api/lists/' + this.lists[key].id, this.lists[key])
         }
       }
+    },
+    removeList: function (listid) {
+      console.log(listid)
+      let index = _.findIndex(this.lists, ['id', listid])
+      this.lists.splice(index, 1)
+      this.cards[listid].forEach(card => {
+        axios.delete(`/api/cards/${card.id}`)
+      })
+      axios.delete(`/api/lists/${listid}`)
     },
     onDragStart: function (event) {
       event.item.style.opacity = '0.4'
