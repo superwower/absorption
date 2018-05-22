@@ -1,5 +1,6 @@
 import express from 'express'
 import { Nuxt, Builder } from 'nuxt'
+import session from 'express-session'
 import bodyParser from 'body-parser'
 
 import api from './api'
@@ -12,6 +13,13 @@ app.set('port', port)
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+
+app.use(session({
+  secret: 'super-secret-key',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { maxAge: 60000 }
+}))
 
 // Import API Routes
 app.use('/api', api)
