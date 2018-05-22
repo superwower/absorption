@@ -9,7 +9,7 @@
         </a>
       </div>
     </nav>
-    <draggable :list="lists" :options="{draggable:'.list', group:'list'}" class="columns" @start="onDragStart" @end="onDragEnd" @change="moveList">
+    <draggable :list="lists" :options="{draggable:'.list', group:'list'}" class="columns scrolling-wrapper" @start="onDragStart" @end="onDragEnd" @change="moveList">
         <List :title="list.title"
               :listId="list.id"
               :cards="cards[list.id]"
@@ -88,4 +88,9 @@ export default {
 </script>
 
 <style scoped>
+.scrolling-wrapper {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
 </style>

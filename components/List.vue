@@ -1,7 +1,7 @@
 <template>
   <div class="column">
     <div class="hero is-dark">
-      <div class="hero-body">
+      <div class="hero-body" style="position:relative;">
         <h1 class="title">
           {{ title }}
         </h1>
