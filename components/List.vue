@@ -5,8 +5,8 @@
         <h1 class="title">
           {{ title }}
         </h1>
-        <a @click="$emit('remove-list', listId)" style="position: absolute; right:10px; top:10px;">
-          <span class="delete "/>
+        <a @click="$emit('remove-list', listId)" class="delete-link" style="position: absolute; right:10px; top:10px;">
+          <span class="delete"/>
         </a>
       </div>
     </div>
@@ -29,8 +29,8 @@
           <p class="card-header-title">
             {{ card.content }}
           </p>
-          <a @click="removeCard(card, index)" class="card-header-icon">
-            <span class="delete "/>
+          <a @click="removeCard(card, index)" class="card-header-icon delete-link">
+            <span class="delete"/>
           </a>
         </header>
       </div>
@@ -87,5 +87,20 @@ export default {
 .draggable
 {
   min-height: 100px;
+}
+
+.delete-link
+{
+  display: none;
+}
+
+.item:hover > header > .delete-link
+{
+  display: block;
+}
+
+.hero-body:hover > .delete-link
+{
+  display: block;
 }
 </style>
