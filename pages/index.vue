@@ -72,7 +72,7 @@ export default {
     moveList: function (event) {
       for (let key in this.lists) {
         this.lists[key].order = key
-        if (event.moved.newIndex >= key) {
+        if (key >= event.moved.newIndex) {
           axios.put('/api/lists/' + this.lists[key].id, this.lists[key])
         }
       }
