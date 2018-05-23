@@ -2,7 +2,7 @@ import { Router } from 'express'
 
 const router = Router()
 
-router.post('/api/login', function (req, res) {
+router.post('/login', function (req, res) {
   if (req.body.username === 'demo' && req.body.password === 'demo') {
     req.session.authUser = { username: 'demo' }
     return res.json({ username: 'demo' })
@@ -10,7 +10,7 @@ router.post('/api/login', function (req, res) {
   res.status(401).json({ error: 'Bad credentials' })
 })
 
-router.post('/api/logout', function (req, res) {
+router.post('/logout', function (req, res) {
   delete req.session.authUser
   res.json({ ok: true })
 })

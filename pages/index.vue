@@ -35,6 +35,11 @@ export default {
       listTitle: ''
     }
   },
+  fetch ({ store, redirect }) {
+    if (!store.state.authUser) {
+      return redirect('/login')
+    }
+  },
   async asyncData () {
     let listsData = await axios.get('/api/lists')
     let cardsData = await axios.get('/api/cards')

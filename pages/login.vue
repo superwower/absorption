@@ -1,0 +1,91 @@
+<template>
+  <section class="hero is-fullheight">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <div class="column is-4 is-offset-4">
+          <h3 class="title has-text-grey">Login</h3>
+          <p class="subtitle has-text-grey">Please login.</p>
+          <div class="box">
+            <figure class="avatar"></figure>
+            <div class="field">
+              <div class="control">
+                <input class="input is-large" type="username" placeholder="Your username" autofocus="" v-model="username">
+                <p class="help is-danger" v-if="errorUsername">
+                  {{ errorUsername }}
+                </p>
+              </div>
+            </div>
+            <div class="field">
+              <div class="control">
+                <input class="input is-large" type="password" placeholder="Your password" v-model="password">
+                <p class="help is-danger" v-if="errorPassword">
+                  {{ errorPassword }}
+                </p>
+              </div>
+            </div>
+            <button class="button is-block is-info is-large is-fullwidth" @click="login">Login</button>
+            <p class="help is-danger" v-if="errorLogin">
+              {{ errorLogin }}
+            </p>
+          </div>
+          <p class="has-text-grey">
+              <a href="">Sign Up</a> &nbsp;·&nbsp;
+              <a href="">Forgot Password</a> &nbsp;·&nbsp;
+              <a href="">Need Help?</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</template>
+
+<script>
+export default {
+  layout: 'login',
+  data () {
+    return {
+      username: '',
+      password: '',
+      errorUsername: null,
+      errorPassword: null,
+      errorLogin: null
+    }
+  },
+  methods: {
+    async login () {
+      try {
+        this.errorUsername = null
+        this.errorPassword = null
+        this.errorLogin = null
+        if (this.username === '') {
+          this.errorUsername = 'This field is required'
+        }
+        if (this.password === '') {
+          this.errorPassword = 'This field is required'
+        }
+        if (this.errorUsername || this.errorPassword) {
+          return
+        }
+        await this.$store.dispatch('login', {
+          username: this.username,
+          password: this.password
+        })
+        this.username = ''
+        this.password = ''
+        this.errorLogin = null
+        this.$router.push('/')
+      } catch (e) {
+        this.errorLogin = e.message
+      }
+    }
+  },
+  head () {
+    return {
+      title: `login`
+    }
+  }
+}
+</script>
+
+<style scoped>
+</style>
