@@ -3,7 +3,7 @@
     <nav class="level">
       <div class="level-left"/>
       <div class="level-right">
-        <input class="input column" type="text" placeholder="list title here" v-model="listTitle">
+        <input class="input column" type="text" placeholder="list title here" @keypress.enter="addList" v-model="listTitle">
         <a class="column is-2" @click="addList">
           <b-icon icon="table-column-plus-before" />
         </a>
