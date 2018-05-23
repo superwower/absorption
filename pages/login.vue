@@ -9,7 +9,7 @@
             <figure class="avatar"></figure>
             <div class="field">
               <div class="control">
-                <input class="input is-large" type="username" placeholder="Your username" autofocus="" v-model="username">
+                <input class="input is-large" type="username" placeholder="Your username" autofocus="" v-model="username" @keypress.enter="login">
                 <p class="help is-danger" v-if="errorUsername">
                   {{ errorUsername }}
                 </p>
@@ -17,7 +17,7 @@
             </div>
             <div class="field">
               <div class="control">
-                <input class="input is-large" type="password" placeholder="Your password" v-model="password">
+                <input class="input is-large" type="password" placeholder="Your password" v-model="password" @keypress.enter="login">
                 <p class="help is-danger" v-if="errorPassword">
                   {{ errorPassword }}
                 </p>
