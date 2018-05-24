@@ -23,7 +23,7 @@
         </nav>
       </div>
     </div>
-    <draggable :options="{draggable:'.item', group:'card'}" @start="onDragStart" @end="onDragEnd" class="draggable">
+    <draggable :list="cards" :options="{draggable:'.item', group:'card'}" @start="onDragStart" @end="onDragEnd" @change="moveCard" class="draggable">
       <div class="card item" v-for="(card, index) in cards" :key="index">
         <header class="card-header">
           <p class="card-header-title">
@@ -67,6 +67,16 @@ export default {
     removeCard: function (card, index) {
       this.cards.splice(index, 1)
       axios.delete(`/api/cards/${card.id}`)
+    },
+    moveCard: function (event) {
+      if (event.moved) {
+        for (let key in this.cards) {
+          this.cards[key].order = key
+          if (key >= event.moved.newIndex) {
+            axios.put('/api/cards/' + this.cards[key].id, this.cards[key])
+          }
+        }
+      }
     },
     onDragStart: function (event) {
       event.item.style.opacity = '0.4'

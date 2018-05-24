@@ -25,6 +25,13 @@ router.post('/cards', function (req, res, next) {
   res.sendStatus(200)
 })
 
+/* PUT card.  */
+router.put('/cards/:id', function (req, res, next) {
+  let index = _.findIndex(cards, ['id', req.params.id]);
+  cards[index] = req.body;
+  res.sendStatus(200)
+})
+
 /* DELETE card.  */
 router.delete('/cards/:id', function (req, res, next) {
   _.remove(cards, function (card) {
