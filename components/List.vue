@@ -70,11 +70,13 @@ export default {
     },
     moveCard: function (event) {
       if (event.moved) {
-        for (let key in this.cards) {
-          this.cards[key].order = key
-          if (key >= event.moved.newIndex) {
-            axios.put('/api/cards/' + this.cards[key].id, this.cards[key])
+        let order = 0
+        for (let i = event.moved.newIndex; i < this.cards.length; i++) {
+          if (i !== 0) {
+            order = this.cards[i - 1].order + 1
           }
+          this.cards[i].order = order
+          axios.put('/api/cards/' + this.cards[i].id, this.cards[i])
         }
       }
     },

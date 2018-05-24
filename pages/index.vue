@@ -76,11 +76,13 @@ export default {
       this.listTitle = ''
     },
     moveList: function (event) {
-      for (let key in this.lists) {
-        this.lists[key].order = key
-        if (key >= event.moved.newIndex) {
-          axios.put('/api/lists/' + this.lists[key].id, this.lists[key])
+      let order = 0
+      for (let i = event.moved.newIndex; i < this.lists.length; i++) {
+        if (i !== 0) {
+          order = this.lists[i - 1].order + 1
         }
+        this.lists[i].order = order
+        axios.put('/api/lists/' + this.lists[i].id, this.lists[i])
       }
     },
     removeList: function (listid) {
