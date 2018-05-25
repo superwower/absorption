@@ -24,16 +24,8 @@
       </div>
     </div>
     <draggable :list="cards" :options="{draggable:'.item', group:'card'}" @start="onDragStart" @end="onDragEnd" @change="moveCard" class="draggable">
-      <div class="card item" v-for="(card, index) in cards" :key="index">
-        <header class="card-header">
-          <p class="card-header-title">
-            {{ card.content }}
-          </p>
-          <a @click="removeCard(card, index)" class="card-header-icon delete-link">
-            <span class="delete"/>
-          </a>
-        </header>
-      </div>
+      <Card v-for="(card, index) in cards" :key="index"
+            :card="card" :index="index" :removeCard="removeCard" />
     </draggable>
   </div>
 </template>
@@ -42,10 +34,12 @@
 import axios from '~/plugins/axios'
 import uuid from 'uuid/v1'
 import draggable from 'vuedraggable'
+import Card from '~/components/Card'
 
 export default {
   components: {
-    draggable
+    draggable,
+    Card
   },
   props: ['listId', 'title', 'cards'],
   data () {
