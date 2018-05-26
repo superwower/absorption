@@ -25,7 +25,7 @@
     </div>
     <draggable :list="cards" :options="{draggable:'.item', group:'card'}" @start="onDragStart" @end="onDragEnd" @change="moveCard" class="draggable">
       <Card v-for="(card, index) in cards" :key="index"
-            :card="card" :index="index" :removeCard="removeCard" />
+            :card="card" :index="index" @removeCard="removeCard" />
     </draggable>
   </div>
 </template>
