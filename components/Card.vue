@@ -4,8 +4,8 @@
       <p class="card-header-title">
         {{ card.content }}
         <a>
-          <b-icon icon="thumb-up-outline" v-if="true" />
-          <b-icon icon="thumb-up" v-else />
+          <b-icon icon="thumb-up" @click="$emit('unlike', card)" v-if="isLiked" />
+          <b-icon icon="thumb-up-outline" @click="$emit('like', card)" v-else />
         </a>
       </p>
       <a @click="$emit('removeCard', card, index)" class="card-header-icon delete-link">
@@ -17,6 +17,11 @@
 
 <script>
 export default {
-  props: ['card', 'index']
+  props: ['card', 'index'],
+  computed: {
+    isLiked: function () {
+      return this.card.like.includes(this.$store.state.authUser.username)
+    }
+  }
 }
 </script>

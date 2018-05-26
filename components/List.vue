@@ -49,11 +49,13 @@ export default {
   },
   methods: {
     addCard: function () {
+      console.log(this.$store.state)
+
       if (this.newcontent === '') {
         return
       }
       const id = uuid()
-      const newCard = { id, listId: this.listId, content: this.newcontent }
+      const newCard = { id, listId: this.listId, content: this.newcontent, like: [] }
       this.cards.push(newCard)
       axios.post('/api/cards', newCard)
       this.newcontent = ''
