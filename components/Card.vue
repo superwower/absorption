@@ -9,6 +9,7 @@
         <a @click="$emit('like', card)" v-else>
           <b-icon icon="thumb-up-outline" />
         </a>
+        {{ card.like.length }}
       </p>
       <a @click="$emit('removeCard', card, index)" class="card-header-icon delete-link">
         <span class="delete"/>
