@@ -3,9 +3,11 @@
     <header class="card-header">
       <p class="card-header-title">
         {{ card.content }}
-        <a>
-          <b-icon icon="thumb-up" @click="$emit('unlike', card)" v-if="isLiked" />
-          <b-icon icon="thumb-up-outline" @click="$emit('like', card)" v-else />
+        <a @click="$emit('unlike', card, index)" v-if="isLiked">
+          <b-icon icon="thumb-up" />
+        </a>
+        <a @click="$emit('like', card)" v-else>
+          <b-icon icon="thumb-up-outline" />
         </a>
       </p>
       <a @click="$emit('removeCard', card, index)" class="card-header-icon delete-link">

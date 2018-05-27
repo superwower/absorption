@@ -27,8 +27,8 @@ router.post('/cards', function (req, res, next) {
 
 /* PUT card.  */
 router.put('/cards/:id', function (req, res, next) {
-  let index = _.findIndex(cards, ['id', req.params.id]);
-  cards[index] = req.body;
+  let index = _.findIndex(cards, ['id', req.params.id])
+  cards[index] = req.body
   res.sendStatus(200)
 })
 
@@ -39,4 +39,26 @@ router.delete('/cards/:id', function (req, res, next) {
   })
   res.sendStatus(200)
 })
+
+/* like card.  */
+router.post('/cards/:id/like', function (req, res, next) {
+  let index = _.findIndex(cards, ['id', req.params.id])
+  const card = cards[index]
+  const user = req.session.authUser.username
+  if (!card.like.includes(user)) {
+    card.like.push(user)
+  }
+  res.sendStatus(200)
+})
+
+/* unlike card.  */
+router.delete('/cards/:id/like', function (req, res, next) {
+  let index = _.findIndex(cards, ['id', req.params.id])
+  const card = cards[index]
+  _.remove(card.like, function (user) {
+    return user === req.session.authUser.username
+  })
+  res.sendStatus(200)
+})
+
 export default router

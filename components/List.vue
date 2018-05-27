@@ -25,7 +25,8 @@
     </div>
     <draggable :list="cards" :options="{draggable:'.item', group:'card'}" @start="onDragStart" @end="onDragEnd" @change="moveCard" class="draggable">
       <Card v-for="(card, index) in cards" :key="index"
-            :card="card" :index="index" @removeCard="removeCard" />
+            :card="card" :index="index" @removeCard="removeCard"
+            @like="like" @unlike="unlike" />
     </draggable>
   </div>
 </template>
@@ -33,6 +34,7 @@
 <script>
 import axios from '~/plugins/axios'
 import uuid from 'uuid/v1'
+import _ from 'lodash'
 import draggable from 'vuedraggable'
 import Card from '~/components/Card'
 
@@ -49,8 +51,6 @@ export default {
   },
   methods: {
     addCard: function () {
-      console.log(this.$store.state)
-
       if (this.newcontent === '') {
         return
       }
@@ -81,6 +81,17 @@ export default {
     },
     onDragEnd: function (event) {
       event.item.style.opacity = '1'
+    },
+    like: function (card) {
+      card.like.push(this.$store.state.authUser.username)
+      axios.post(`/api/cards/${card.id}/like`)
+    },
+    unlike: function (card, index) {
+      const usename = this.$store.state.authUser.username
+      card.like = _.remove(card.like, function (user) {
+        return usename !== user
+      })
+      axios.delete(`/api/cards/${card.id}/like`)
     }
   }
 }
