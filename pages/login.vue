@@ -3,9 +3,8 @@
     <div class="hero-body">
       <div class="container has-text-centered">
         <div class="column is-4 is-offset-4">
-          <h3 class="title has-text-grey">Login</h3>
-          <p class="subtitle has-text-grey">Please login.</p>
-          <div class="box">
+          <h3 class="title has-text-grey">absorption</h3>
+          <div class="box" v-if="mode === 'Login'">
             <figure class="avatar"></figure>
             <div class="field">
               <div class="control">
@@ -28,10 +27,40 @@
               {{ errorLogin }}
             </p>
           </div>
+          <div class="box" v-else>
+            <figure class="avatar"></figure>
+            <div class="field">
+              <div class="control">
+                <input class="input is-large" type="username" placeholder="Your username" autofocus="" v-model="username" @keypress.enter="login">
+                <p class="help is-danger" v-if="errorUsername">
+                  {{ errorUsername }}
+                </p>
+              </div>
+            </div>
+            <div class="field">
+              <div class="control">
+                <input class="input is-large" type="password" placeholder="Your password" v-model="password" @keypress.enter="login">
+                <p class="help is-danger" v-if="errorPassword">
+                  {{ errorPassword }}
+                </p>
+              </div>
+            </div>
+            <div class="field">
+              <div class="control">
+                <input class="input is-large" type="password" placeholder="Confirm password" v-model="confirmPassword" @keypress.enter="login">
+                <p class="help is-danger" v-if="errorPassword">
+                  {{ errorPassword }}
+                </p>
+              </div>
+            </div>
+            <button class="button is-block is-info is-large is-fullwidth" @click="login">Sign up</button>
+            <p class="help is-danger" v-if="errorLogin">
+              {{ errorLogin }}
+            </p>
+          </div>
           <p class="has-text-grey">
-              <a href="">Sign Up</a> &nbsp;·&nbsp;
-              <a href="">Forgot Password</a> &nbsp;·&nbsp;
-              <a href="">Need Help?</a>
+              <a @click="switchMode('Login')">Login</a> &nbsp;·&nbsp;
+              <a @click="switchMode('Sign up')">Sign Up</a> 
           </p>
         </div>
       </div>
@@ -44,6 +73,7 @@ export default {
   layout: 'login',
   data () {
     return {
+      mode: 'Login',
       username: '',
       password: '',
       errorUsername: null,
@@ -77,6 +107,9 @@ export default {
       } catch (e) {
         this.errorLogin = e.message
       }
+    },
+    switchMode (newMode) {
+      this.mode = newMode
     }
   },
   head () {
