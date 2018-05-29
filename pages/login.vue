@@ -31,7 +31,7 @@
             <figure class="avatar"></figure>
             <div class="field">
               <div class="control">
-                <input class="input is-large" type="username" placeholder="Your username" autofocus="" v-model="username" @keypress.enter="login">
+                <input class="input is-large" type="username" placeholder="Your username" autofocus="" v-model="username" @keypress.enter="signup">
                 <p class="help is-danger" v-if="errorUsername">
                   {{ errorUsername }}
                 </p>
@@ -39,7 +39,7 @@
             </div>
             <div class="field">
               <div class="control">
-                <input class="input is-large" type="password" placeholder="Your password" v-model="password" @keypress.enter="login">
+                <input class="input is-large" type="password" placeholder="Your password" v-model="password" @keypress.enter="signup">
                 <p class="help is-danger" v-if="errorPassword">
                   {{ errorPassword }}
                 </p>
@@ -47,13 +47,13 @@
             </div>
             <div class="field">
               <div class="control">
-                <input class="input is-large" type="password" placeholder="Confirm password" v-model="confirmPassword" @keypress.enter="login">
-                <p class="help is-danger" v-if="errorPassword">
-                  {{ errorPassword }}
+                <input class="input is-large" type="password" placeholder="Confirm password" v-model="confirmPassword" @keypress.enter="signup">
+                <p class="help is-danger" v-if="errorConfirmPassword">
+                  {{ errorConfirmPassword }}
                 </p>
               </div>
             </div>
-            <button class="button is-block is-info is-large is-fullwidth" @click="login">Sign up</button>
+            <button class="button is-block is-info is-large is-fullwidth" @click="signup">Sign up</button>
             <p class="help is-danger" v-if="errorLogin">
               {{ errorLogin }}
             </p>
@@ -69,6 +69,8 @@
 </template>
 
 <script>
+import axios from '~/plugins/axios'
+
 export default {
   layout: 'login',
   data () {
@@ -76,8 +78,10 @@ export default {
       mode: 'Login',
       username: '',
       password: '',
+      confirmPassword: '',
       errorUsername: null,
       errorPassword: null,
+      errorConfirmPassword: null,
       errorLogin: null
     }
   },
@@ -107,6 +111,38 @@ export default {
       } catch (e) {
         this.errorLogin = e.message
       }
+    },
+    async signup () {
+      this.errorUsername = null
+      this.errorPassword = null
+      this.errorConfirmPassword = null
+      if (this.username === '') {
+        this.errorUsername = 'This field is required'
+      }
+      if (this.password === '') {
+        this.errorPassword = 'This field is required'
+      }
+      if (this.errorConfirmPassword === '') {
+        this.errorConfirmPassword = 'This field is required'
+      }
+      if (this.errorConfirmPassword !== '' && this.password !== this.confirmPassword) {
+        this.errorConfirmPassword = 'Password is not matched'
+      }
+      if (this.errorUsername || this.errorPassword || this.errorConfirmPassword) {
+        return
+      }
+      await axios.post('/api/signup', {
+        username: this.username,
+        password: this.password
+      })
+      await this.$store.dispatch('login', {
+        username: this.username,
+        password: this.password
+      })
+      this.username = ''
+      this.password = ''
+      this.errorLogin = null
+      this.$router.push('/')
     },
     switchMode (newMode) {
       this.mode = newMode
