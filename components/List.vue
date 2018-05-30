@@ -75,6 +75,17 @@ export default {
           axios.put('/api/cards/' + this.cards[i].id, this.cards[i])
         }
       }
+      if (event.added) {
+        let order = 0
+        for (let i = event.added.newIndex; i < this.cards.length; i++) {
+          if (i !== 0) {
+            order = this.cards[i - 1].order + 1
+          }
+          this.cards[i].order = order
+          this.cards[i].listId = this.listId
+          axios.put('/api/cards/' + this.cards[i].id, this.cards[i])
+        }
+      }
     },
     onDragStart: function (event) {
       event.item.style.opacity = '0.4'
