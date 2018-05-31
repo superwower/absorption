@@ -5,13 +5,13 @@ const router = Router()
 
 // Mock Cards
 const cards = [
-  { id: '1', order: 1, listId: 'keep', content: '1st keep item', like: ['demo'] },
-  { id: '2', order: 2, listId: 'keep', content: '2nd keep item', like: [] },
-  { id: '3', order: 3, listId: 'problem', content: '1st problem item', like: ['demo'] },
-  { id: '4', order: 2, listId: 'problem', content: '2nd problem item', like: ['demo'] },
-  { id: '5', order: 1, listId: 'problem', content: '3rd problem item', like: [] },
-  { id: '6', order: 2, listId: 'try', content: '1st try item', like: [] },
-  { id: '7', order: 1, listId: 'try', content: '2nd try item', like: [] }
+  { id: '1', order: 1, listId: 'keep', content: '1st keep item', like: ['demo'], author: 'demo' },
+  { id: '2', order: 2, listId: 'keep', content: '2nd keep item', like: [], author: 'test' },
+  { id: '3', order: 3, listId: 'problem', content: '1st problem item', like: ['demo'], author: 'test' },
+  { id: '4', order: 2, listId: 'problem', content: '2nd problem item', like: ['demo'], author: 'demo' },
+  { id: '5', order: 1, listId: 'problem', content: '3rd problem item', like: [], author: 'sample' },
+  { id: '6', order: 2, listId: 'try', content: '1st try item', like: [], author: 'sample' },
+  { id: '7', order: 1, listId: 'try', content: '2nd try item', like: [], author: 'demo' }
 ]
 
 /* GET cards listing. */
