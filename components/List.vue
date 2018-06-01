@@ -55,7 +55,7 @@ export default {
         return
       }
       const id = uuid()
-      const newCard = { id, listId: this.listId, content: this.newcontent, like: [] }
+      const newCard = { id, listId: this.listId, content: this.newcontent, like: [], author: this.$store.state.authUser.username }
       this.cards.push(newCard)
       axios.post('/api/cards', newCard)
       this.newcontent = ''
