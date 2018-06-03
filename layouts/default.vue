@@ -2,7 +2,9 @@
   <section>
     <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
-        <p class="navbar-item title is-3" style="color:white">Retrospective board</p>
+        <nuxt-link :to="{ name: 'index' }">
+          <p class="navbar-item title is-3" style="color:white">Retrospective board</p>
+        </nuxt-link>
       </div>
     </nav>
 
