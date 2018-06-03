@@ -5,7 +5,7 @@ const router = Router()
 
 // Mock Boards
 const boards = [
-  { id: '1', order: 1, title: 'sapmle' },
+  { id: '1', order: 1, title: 'sample' },
   { id: '2', order: 2, title: 'test' },
   { id: '3', order: 3, title: 'hogehoge' }
 ]
