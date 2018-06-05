@@ -5,9 +5,9 @@ const router = Router()
 
 // Mock Lists
 const lists = [
-  { id: 'keep', order: 1, title: 'keep' },
-  { id: 'problem', order: 2, title: 'problem' },
-  { id: 'try', order: 3, title: 'try' }
+  { id: '1', order: 1, boardId: '1', title: 'keep' },
+  { id: '2', order: 2, boardId: '1', title: 'problem' },
+  { id: '3', order: 3, boardId: '1', title: 'try' }
 ]
 
 /* GET lists listing. */
