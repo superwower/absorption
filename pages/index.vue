@@ -1,7 +1,7 @@
 <template>
   <div class="section columns is-multiline">
     <div class="column is-3" v-for="(board, index) in boards" :key="index" >
-      <nuxt-link :to="{ name: 'board' }">
+      <nuxt-link :to="{ name: 'board' , params: { id: board.id, title: board.title}}">
         <article class="tile is-child notification is-dark">
           <p class="title">{{ board.title }}</p>
         </article>

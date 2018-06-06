@@ -12,7 +12,11 @@ const lists = [
 
 /* GET lists listing. */
 router.get('/lists', function (req, res, next) {
-  res.json(lists)
+  let result = lists
+  if (req.query.boardId) {
+    result = _.filter(lists, { 'boardId': req.query.boardId })
+  }
+  res.json(result)
 })
 
 /* POST list.  */

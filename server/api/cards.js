@@ -16,7 +16,11 @@ const cards = [
 
 /* GET cards listing. */
 router.get('/cards', function (req, res, next) {
-  res.json(cards)
+  let result = cards
+  if (req.query.boardId) {
+    result = _.filter(cards, { 'boardId': req.query.boardId })
+  }
+  res.json(result)
 })
 
 /* POST card.  */

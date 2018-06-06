@@ -43,7 +43,7 @@ export default {
     draggable,
     Card
   },
-  props: ['listId', 'title', 'cards'],
+  props: ['boardId', 'listId', 'title', 'cards'],
   data () {
     return {
       newcontent: ''
@@ -55,7 +55,7 @@ export default {
         return
       }
       const id = uuid()
-      const newCard = { id, listId: this.listId, content: this.newcontent, like: [], author: this.$store.state.authUser.username }
+      const newCard = { id, listId: this.listId, boardId: this.boardId, content: this.newcontent, like: [], author: this.$store.state.authUser.username }
       this.cards.push(newCard)
       axios.post('/api/cards', newCard)
       this.newcontent = ''

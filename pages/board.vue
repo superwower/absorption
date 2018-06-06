@@ -1,7 +1,9 @@
 <template>
   <div>
     <nav class="level">
-      <div class="level-left"/>
+      <div class="level-left">
+        <h1 class="title ">{{ title }}</h1>
+      </div>
       <div class="level-right">
         <input class="input column" type="text" placeholder="list title here" @keypress.enter="addList" v-model="listTitle">
         <a class="column is-2" @click="addList">
@@ -11,6 +13,7 @@
     </nav>
     <draggable :list="lists" :options="{draggable:'.list', group:'list'}" class="columns scrolling-wrapper" @start="onDragStart" @end="onDragEnd" @change="moveList">
         <List :title="list.title"
+              :boardId="boardId"
               :listId="list.id"
               :cards="cards[list.id]"
               v-on:remove-list="removeList"
@@ -40,9 +43,10 @@ export default {
       return redirect('/login')
     }
   },
-  async asyncData () {
-    let listsData = await axios.get('/api/lists')
-    let cardsData = await axios.get('/api/cards')
+  async asyncData (context) {
+    const boardId = context.params.id
+    let listsData = await axios.get(`/api/lists?boardId=${boardId}`)
+    let cardsData = await axios.get(`/api/cards?boardId=${boardId}`)
 
     let lists = _.sortBy(listsData.data, ['order'])
     let cards = {}
@@ -53,7 +57,7 @@ export default {
     _.orderBy(cardsData.data, ['listId', 'order'], ['asc', 'asc']).forEach(card => {
       cards[card.listId].push(card)
     })
-    return { cards, lists }
+    return { cards, lists, boardId, title: context.params.title }
   },
   head () {
     return {
@@ -69,7 +73,7 @@ export default {
       if (this.listTitle === '') {
         return
       }
-      const newList = { id: uuid(), order: this.lists.length, title: this.listTitle }
+      const newList = { id: uuid(), boardId: this.boardId, order: this.lists.length, title: this.listTitle }
       this.lists.push(newList)
       this.cards[newList.id] = []
       axios.post('/api/lists', newList)
