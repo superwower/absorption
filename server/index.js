@@ -52,7 +52,7 @@ mockgoose.prepareStorage()
   .then(() => {
     mongoose.connect('mongodb://foobar/baz')
     mongoose.connection.on('connected', () => {
-      // Listen the server
+    // Listen the server
       app.listen(port, host)
       console.log('Server listening on ' + host + ':' + port) // eslint-disable-line no-console
     })
