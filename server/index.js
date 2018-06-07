@@ -2,6 +2,8 @@ import express from 'express'
 import { Nuxt, Builder } from 'nuxt'
 import session from 'express-session'
 import bodyParser from 'body-parser'
+import mongoose from 'mongoose'
+import {Mockgoose} from 'mockgoose'
 
 import api from './api'
 
@@ -39,7 +41,19 @@ if (config.dev) {
 
 // Give nuxt middleware to express
 app.use(nuxt.render)
+const mockgoose = new Mockgoose(mongoose)
 
-// Listen the server
-app.listen(port, host)
-console.log('Server listening on ' + host + ':' + port) // eslint-disable-line no-console
+const proxy = process.env.http_proxy
+if (proxy) {
+  mockgoose.helper.setProxy(proxy)
+}
+
+mockgoose.prepareStorage()
+  .then(() => {
+    mongoose.connect('mongodb://foobar/baz')
+    mongoose.connection.on('connected', () => {
+      // Listen the server
+      app.listen(port, host)
+      console.log('Server listening on ' + host + ':' + port) // eslint-disable-line no-console
+    })
+  })
