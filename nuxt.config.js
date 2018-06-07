@@ -14,7 +14,7 @@ module.exports = {
     ]
   },
   modules: [
-    'nuxt-buefy',
+    'nuxt-buefy'
   ],
   /*
   ** Global CSS

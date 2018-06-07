@@ -27,8 +27,8 @@ router.post('/lists', function (req, res, next) {
 
 /* PUT list.  */
 router.put('/lists/:id', function (req, res, next) {
-  let index = _.findIndex(lists, ['id', req.params.id]);
-  lists[index] = req.body;
+  let index = _.findIndex(lists, ['id', req.params.id])
+  lists[index] = req.body
   res.sendStatus(200)
 })
 

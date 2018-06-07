@@ -1,7 +1,7 @@
-import ListComponent from './List.vue';
+import ListComponent from './List.vue'
 
 describe('test', () => {
   test('test', () => {
-    expect(true).toEqual(true);
-  });
-});
+    expect(true).toEqual(true)
+  })
+})
