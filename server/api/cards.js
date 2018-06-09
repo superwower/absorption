@@ -1,68 +1,58 @@
 import { Router } from 'express'
 import _ from 'lodash'
 
-const router = Router()
+import Card from '../models/card'
 
-// Mock Cards
-const cards = [
-  { id: '1', order: 1, boardId: '1', listId: '1', content: '1st keep item', like: ['demo'], author: 'demo' },
-  { id: '2', order: 2, boardId: '1', listId: '1', content: '2nd keep item', like: [], author: 'test' },
-  { id: '3', order: 3, boardId: '1', listId: '2', content: '1st problem item', like: ['demo'], author: 'test' },
-  { id: '4', order: 2, boardId: '1', listId: '2', content: '2nd problem item', like: ['demo'], author: 'demo' },
-  { id: '5', order: 1, boardId: '1', listId: '2', content: '3rd problem item', like: [], author: 'sample' },
-  { id: '6', order: 2, boardId: '1', listId: '3', content: '1st try item', like: [], author: 'sample' },
-  { id: '7', order: 1, boardId: '1', listId: '3', content: '2nd try item', like: [], author: 'demo' }
-]
+const router = Router()
 
 /* GET cards listing. */
 router.get('/cards', function (req, res, next) {
-  let result = cards
+  const query = {}
   if (req.query.boardId) {
-    result = _.filter(cards, { 'boardId': req.query.boardId })
+    query.boardId = req.query.boardId
   }
-  res.json(result)
+  Card.find(query).exec().then(lists => {
+    return res.json(lists)
+  })
 })
 
 /* POST card.  */
 router.post('/cards', function (req, res, next) {
-  cards.push(req.body)
-  res.sendStatus(200)
+  Card.create(req.body).then(() => {
+    return res.sendStatus(200)
+  })
 })
 
 /* PUT card.  */
 router.put('/cards/:id', function (req, res, next) {
-  let index = _.findIndex(cards, ['id', req.params.id])
-  cards[index] = req.body
-  res.sendStatus(200)
+  Card.where({ id: req.params.id }).update(req.body).exec().then(() => {
+    return res.sendStatus(200)
+  })
 })
 
 /* DELETE card.  */
 router.delete('/cards/:id', function (req, res, next) {
-  _.remove(cards, function (card) {
-    return card.id === req.params.id
+  Card.deleteOne({ id: req.params.id }).then(() => {
+    return res.sendStatus(200)
   })
-  res.sendStatus(200)
 })
 
 /* like card.  */
 router.post('/cards/:id/like', function (req, res, next) {
-  let index = _.findIndex(cards, ['id', req.params.id])
-  const card = cards[index]
-  const user = req.session.authUser.username
-  if (!card.like.includes(user)) {
-    card.like.push(user)
-  }
-  res.sendStatus(200)
+  Card.where({ id: req.params.id }).update(
+    { '$addToSet': { like: req.session.authUser.username } }
+  ).exec().then(() => {
+    return res.sendStatus(200)
+  })
 })
 
 /* unlike card.  */
 router.delete('/cards/:id/like', function (req, res, next) {
-  let index = _.findIndex(cards, ['id', req.params.id])
-  const card = cards[index]
-  _.remove(card.like, function (user) {
-    return user === req.session.authUser.username
+  Card.where({ id: req.params.id }).update(
+    { '$pullAll': { like: req.session.authUser.username } }
+  ).exec().then(() => {
+    return res.sendStatus(200)
   })
-  res.sendStatus(200)
 })
 
 export default router
