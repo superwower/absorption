@@ -1,36 +1,35 @@
 import { Router } from 'express'
 import _ from 'lodash'
 
-const router = Router()
+import Board from '../models/board'
 
-// Mock Boards
-const boards = [
-  { id: '1', order: 1, title: 'retrospective' }
-]
+const router = Router()
 
 /* GET boards listing. */
 router.get('/boards', function (req, res, next) {
-  res.json(boards)
+  Board.find().exec().then(boards => {
+    return res.json(boards)
+  })
 })
 
 /* POST board.  */
 router.post('/boards', function (req, res, next) {
-  boards.push(req.body)
-  res.sendStatus(200)
+  Board.create(req.body).then(() => {
+    return res.sendStatus(200)
+  })
 })
 
 /* PUT board.  */
 router.put('/boards/:id', function (req, res, next) {
-  let index = _.findIndex(boards, ['id', req.params.id])
-  boards[index] = req.body
-  res.sendStatus(200)
+  Board.where({ id: req.params.id }).update(req.body).exec().then(() => {
+    return res.sendStatus(200)
+  })
 })
 
 /* DELETE board.  */
 router.delete('/boards/:id', function (req, res, next) {
-  _.remove(boards, function (board) {
-    return board.id === req.params.id
+  Board.deleteOne({ id: req.params.id }).then(() => {
+    return res.sendStatus(200)
   })
-  res.sendStatus(200)
 })
 export default router
