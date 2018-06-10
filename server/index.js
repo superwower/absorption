@@ -41,8 +41,8 @@ if (config.dev) {
 
 // Give nuxt middleware to express
 app.use(nuxt.render)
-const mockgoose = new Mockgoose(mongoose)
 
+const mockgoose = new Mockgoose(mongoose)
 const proxy = process.env.http_proxy
 if (proxy) {
   mockgoose.helper.setProxy(proxy)
