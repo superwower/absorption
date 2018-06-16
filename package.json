@@ -24,6 +24,7 @@
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "graphql": "^0.13.2",
+    "graphql-subscriptions": "^0.5.8",
     "graphql-tools": "^3.0.2",
     "lodash": "^4.17.10",
     "mockgoose": "^7.3.5",
@@ -31,6 +32,7 @@
     "nuxt": "^1.4.0",
     "nuxt-buefy": "^0.0.4",
     "source-map-support": "^0.5.6",
+    "subscriptions-transport-ws": "^0.9.11",
     "uuid": "^3.2.1",
     "vuedraggable": "^2.16.0",
     "whatwg-fetch": "^2.0.4"
