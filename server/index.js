@@ -3,7 +3,7 @@ import { Nuxt, Builder } from 'nuxt'
 import session from 'express-session'
 import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
-import {Mockgoose} from 'mockgoose'
+import { Mockgoose } from 'mockgoose'
 
 import api from './api'
 import config from '../nuxt.config.js'

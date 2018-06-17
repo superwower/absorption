@@ -2,6 +2,7 @@ import { Router } from 'express'
 import bodyParser from 'body-parser'
 import { graphqlExpress, graphiqlExpress } from 'apollo-server-express'
 import { makeExecutableSchema } from 'graphql-tools'
+import pubsub from '../lib/pubsub'
 
 import Board from '../models/board'
 import List from '../models/list'
@@ -38,9 +39,12 @@ type Card {
   like: [String],
   author: String
 }
-
+type Subscription {
+  cardUpdated(boardId: String): [Card]
+}
 schema {
   query: Query
+  subscription: Subscription
 }`]
 
 const resolvers = {
@@ -70,6 +74,11 @@ const resolvers = {
         query.boardId = args.boardId
       }
       return Card.find(query).exec()
+    }
+  },
+  Subscription: {
+    cardUpdated: {
+      subscribe: () => pubsub.asyncIterator('cardUpdated')
     }
   }
 }

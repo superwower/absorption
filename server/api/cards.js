@@ -1,5 +1,4 @@
 import { Router } from 'express'
-import _ from 'lodash'
 
 import Card from '../models/card'
 
@@ -19,6 +18,7 @@ router.get('/cards', function (req, res, next) {
 /* POST card.  */
 router.post('/cards', function (req, res, next) {
   Card.create(req.body).then(() => {
+    // pubsub.publish('commentAdded', { commentAdded: { id: 1, content: 'Hello!' }})
     return res.sendStatus(200)
   })
 })
