@@ -83,7 +83,7 @@ const resolvers = {
   }
 }
 
-const schema = makeExecutableSchema({typeDefs, resolvers})
+export const schema = makeExecutableSchema({typeDefs, resolvers})
 
 router.use('/graphql', bodyParser.json(), graphqlExpress({schema}))
 router.use('/graphiql', graphiqlExpress({endpointURL: '/api/graphql'}))

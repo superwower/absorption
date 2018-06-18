@@ -4,6 +4,10 @@ import session from 'express-session'
 import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
 import { Mockgoose } from 'mockgoose'
+import { execute, subscribe } from 'graphql'
+import { createServer } from 'http'
+import { SubscriptionServer } from 'subscriptions-transport-ws'
+import { schema } from './api/graphql'
 
 import api from './api'
 import config from '../nuxt.config.js'
@@ -74,9 +78,17 @@ mockgoose.prepareStorage()
           { id: '3', order: 3, boardId: '1', title: 'try' }
         ]))
         .then(() => {
-        // Listen the server
-          app.listen(port, host)
-          console.log('Server listening on ' + host + ':' + port) // eslint-disable-line no-console
+          const ws = createServer(app)
+          ws.listen(port, host, () => {
+            return new SubscriptionServer({
+              execute,
+              subscribe,
+              schema
+            }, {
+              server: ws,
+              path: '/api/subscriptions'
+            })
+          })
         })
     })
   })
