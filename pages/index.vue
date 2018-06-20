@@ -1,11 +1,14 @@
 <template>
   <div class="section columns is-multiline">
-    <div class="column is-3" v-for="(board, index) in boards" :key="index" >
+    <div class="column is-3" v-for="(board, index) in boards" :key="index" style="position:relative;">
       <nuxt-link :to="{ name: 'board' , params: { id: board.id, title: board.title}}">
         <article class="tile is-child notification is-dark">
           <p class="title">{{ board.title }}</p>
         </article>
       </nuxt-link>
+      <a @click="removeBoard(board.id)" class="delete-link" style="position: absolute; right:20px; top:20px;">
+        <span class="delete"/>
+      </a>
     </div>
     <div class="column is-3">
       <article class="tile is-child notification is-dark">
@@ -54,6 +57,11 @@ export default {
       this.boards.push(newBoard)
       axios.post('/api/boards', newBoard)
       this.boardTitle = ''
+    },
+    removeBoard: function (id) {
+      let index = _.findIndex(this.boards, ['id', id])
+      this.boards.splice(index, 1)
+      axios.delete(`/api/boards/${id}`)
     }
   }
 }
