@@ -14,17 +14,8 @@ module.exports = {
     ]
   },
   modules: [
-    'nuxt-buefy',
-    '@nuxtjs/apollo'
+    'nuxt-buefy'
   ],
-  apollo: {
-    clientConfigs: {
-      default: {
-        httpEndpoint: `http://${process.env.HOST || 'localhost'}:${process.env.PORT || 3000}`,
-        wsEndpoint: `http://${process.env.HOST || 'localhost'}:${process.env.PORT || 3000}`
-      }
-    }
-  },
   /*
   ** Global CSS
   */
