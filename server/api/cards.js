@@ -30,6 +30,17 @@ router.put('/cards/:id', function (req, res, next) {
   })
 })
 
+/* DELETE cards.  */
+router.delete('/cards', function (req, res, next) {
+  const boardId = req.query.boardId
+  if (boardId) {
+    return res.sendStatus(400)
+  }
+  Card.deleteMany({ boardId: boardId }).then(() => {
+    return res.sendStatus(200)
+  })
+})
+
 /* DELETE card.  */
 router.delete('/cards/:id', function (req, res, next) {
   Card.deleteOne({ id: req.params.id }).then(() => {
