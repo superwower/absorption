@@ -90,7 +90,6 @@ export default {
       }
     },
     removeList: function (listid) {
-      console.log(listid)
       let index = _.findIndex(this.lists, ['id', listid])
       this.lists.splice(index, 1)
       this.cards[listid].forEach(card => {
