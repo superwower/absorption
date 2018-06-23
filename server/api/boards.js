@@ -1,6 +1,7 @@
 import { Router } from 'express'
-import _ from 'lodash'
 
+import Card from '../models/card'
+import List from '../models/list'
 import Board from '../models/board'
 
 const router = Router()
@@ -28,8 +29,16 @@ router.put('/boards/:id', function (req, res, next) {
 
 /* DELETE board.  */
 router.delete('/boards/:id', function (req, res, next) {
-  Board.deleteOne({ id: req.params.id }).then(() => {
-    return res.sendStatus(200)
-  })
+  const boardId = req.params.id
+
+  Card.deleteMany({ boardId })
+    .then(() => {
+      return List.deleteMany({ boardId })
+    })
+    .then(() => {
+      return Board.deleteOne({ id: boardId })
+    }).then(() => {
+      return res.sendStatus(200)
+    })
 })
 export default router

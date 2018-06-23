@@ -92,9 +92,6 @@ export default {
     removeList: function (listid) {
       let index = _.findIndex(this.lists, ['id', listid])
       this.lists.splice(index, 1)
-      this.cards[listid].forEach(card => {
-        axios.delete(`/api/cards/${card.id}`)
-      })
       axios.delete(`/api/lists/${listid}`)
     },
     onDragStart: function (event) {
