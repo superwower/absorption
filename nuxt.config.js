@@ -14,12 +14,21 @@ module.exports = {
     ]
   },
   modules: [
-    'nuxt-buefy'
+    'nuxt-buefy',
+    '@nuxtjs/apollo'
   ],
   /*
   ** Global CSS
   */
   css: ['~/assets/css/main.css'],
+  apollo: {
+    clientConfigs: {
+      default: {
+        httpEndpoint: 'http://localhost:3000/api/graphql',
+        // wsEndpoint: 'ws://localhost:3000'
+      }
+    }
+  },
   /*
   ** Add axios globally
   */
