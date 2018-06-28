@@ -25,7 +25,7 @@ module.exports = {
     clientConfigs: {
       default: {
         httpEndpoint: 'http://localhost:3000/api/graphql',
-        // wsEndpoint: 'ws://localhost:3000'
+        wsEndpoint: 'ws://localhost:3000/api/subscriptions'
       }
     }
   },
