@@ -38,25 +38,22 @@ export default {
       }
       `,
       update: data => data,
-      // subscribeToMore: {
-      //   document: gql`subscription name($param: String!) {
-      //     itemAdded(param: $param) {
-      //       id
-      //       label
-      //     }
-      //   }`,
-      //   // Variables passed to the subscription. Since we're using a function,
-      //   // they are reactive
-      //   variables () {
-      //     return {
-      //       param: this.param,
-      //     }
-      //   },
-      //   // Mutate the previous result
-      //   updateQuery: (previousResult, { subscriptionData }) => {
-      //     // Here, return the new result from the previous with the new data
-      //   }
-      // }
+      subscribeToMore: {
+        document: gql`subscription cardUpdated($param: String) {
+          cardUpdated(boardId: $param) {
+            id
+            content
+          }
+        }`,
+        variables () {
+          return {
+            param: 'this.param'
+          }
+        },
+        updateQuery: (previousResult, { subscriptionData }) => {
+          console.log(subscriptionData.data)
+        }
+      }
     }
   },
   methods: {

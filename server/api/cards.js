@@ -1,6 +1,7 @@
 import { Router } from 'express'
 
 import Card from '../models/card'
+import pubsub from '../lib/pubsub'
 
 const router = Router()
 
@@ -18,7 +19,7 @@ router.get('/cards', function (req, res, next) {
 /* POST card.  */
 router.post('/cards', function (req, res, next) {
   Card.create(req.body).then(() => {
-    pubsub.publish('cardUpdated', { cardUpdated: { id: 1, content: 'Hello!' }})
+    pubsub.publish('cardUpdated', { cardUpdated: req.body })
     return res.sendStatus(200)
   })
 })
