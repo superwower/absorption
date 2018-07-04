@@ -40,7 +40,7 @@ type Card {
   author: String
 }
 type Subscription {
-  cardUpdated(boardId: String): [Card]
+  cardUpdated(boardId: String): Card
 }
 schema {
   query: Query

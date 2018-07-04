@@ -37,7 +37,23 @@ export default {
         },
       }
       `,
-      update: data => data
+      update: data => data,
+      subscribeToMore: {
+        document: gql`subscription cardUpdated($param: String) {
+          cardUpdated(boardId: $param) {
+            id
+            content
+          }
+        }`,
+        variables () {
+          return {
+            param: 'this.param'
+          }
+        },
+        updateQuery: (previousResult, { subscriptionData }) => {
+          console.log(subscriptionData.data)
+        }
+      }
     }
   },
   methods: {
