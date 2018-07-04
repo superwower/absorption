@@ -1,8 +1,8 @@
 [![Heroku](https://heroku-badge.herokuapp.com/?app=absorption)](https://absorption.herokuapp.com/)
 
-# absorption
-
-> Retrospective board
+<p align="center">
+  <img width="200" height="200" src="./static/logo.png">
+</p>
 
 ## Build Setup
 
