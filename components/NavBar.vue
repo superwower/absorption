@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar is-dark">
+  <nav class="navbar is-primary">
     <div class="navbar-brand">
       <nuxt-link :to="{ name: 'index' }">
         <p class="navbar-item title is-3" style="color:white">Retrospective board</p>

@@ -15,12 +15,13 @@ module.exports = {
   },
   modules: [
     'nuxt-buefy',
-    '@nuxtjs/apollo'
+    '@nuxtjs/apollo',
+    ['nuxt-sass-resources-loader', '~/assets/css/main.scss'],
   ],
   /*
   ** Global CSS
   */
-  css: ['~/assets/css/main.css'],
+  css: ['~/assets/css/main.scss'],
   apollo: {
     clientConfigs: {
       default: {

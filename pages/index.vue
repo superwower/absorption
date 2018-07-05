@@ -2,7 +2,7 @@
   <div class="section columns is-multiline">
     <div class="column is-3" v-for="(board, index) in boards" :key="index" style="position:relative;">
       <nuxt-link :to="{ name: 'board' , params: { id: board.id, title: board.title}}">
-        <article class="tile is-child notification is-dark">
+        <article class="tile is-child notification is-primary">
           <p class="title">{{ board.title }}</p>
         </article>
       </nuxt-link>
@@ -11,7 +11,7 @@
       </a>
     </div>
     <div class="column is-3">
-      <article class="tile is-child notification is-dark">
+      <article class="tile is-child notification is-primary">
         <div class="field has-addons">
           <p class="control" style="width:100%">
             <input class="input" type="text" placeholder="input board title here" v-model="boardTitle">

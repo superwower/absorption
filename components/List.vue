@@ -1,6 +1,6 @@
 <template>
   <div class="column">
-    <div class="hero is-dark">
+    <div class="hero is-primary">
       <div class="hero-body" style="position:relative;">
         <h1 class="title">
           {{ title }}
@@ -17,7 +17,7 @@
           <div class="level-left"/>
           <div class="level-right">
             <p class="level-item">
-              <a class="button is-dark is-rounded" @click="addCard">Add Card</a>
+              <a class="button is-primary is-rounded" @click="addCard">Add Card</a>
             </p>
           </div>
         </nav>

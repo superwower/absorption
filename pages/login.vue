@@ -4,9 +4,10 @@
     <div class="hero-body">
       <div class="container has-text-centered">
         <div class="column is-4 is-offset-4">
-          <h3 class="title has-text-grey">absorption</h3>
           <div class="box" v-if="mode === 'Login'">
-            <figure class="avatar"></figure>
+            <figure class="avatar">
+              <img class="logo" src="@/static/logo.png">
+            </figure>
             <div class="field">
               <div class="control">
                 <input class="input is-large" type="username" placeholder="Your username" autofocus="" v-model="username" @keypress.enter="login">
@@ -23,13 +24,15 @@
                 </p>
               </div>
             </div>
-            <button class="button is-block is-info is-large is-fullwidth" @click="login">Login</button>
+            <a class="button is-primary is-large is-fullwidth" @click="login">Login</a>
             <p class="help is-danger" v-if="errorLogin">
               {{ errorLogin }}
             </p>
           </div>
           <div class="box" v-else>
-            <figure class="avatar"></figure>
+            <figure class="avatar">
+              <img src="/static/logo.png">
+            </figure>
             <div class="field">
               <div class="control">
                 <input class="input is-large" type="username" placeholder="Your username" autofocus="" v-model="username" @keypress.enter="signup">
@@ -54,7 +57,7 @@
                 </p>
               </div>
             </div>
-            <button class="button is-block is-info is-large is-fullwidth" @click="signup">Sign up</button>
+            <a class="button is-primary is-large is-fullwidth" @click="signup">Sign up</a>
             <p class="help is-danger" v-if="errorLogin">
               {{ errorLogin }}
             </p>
@@ -158,4 +161,13 @@ export default {
 </script>
 
 <style scoped>
+.avatar {
+    margin-top: -70px;
+    padding-bottom: 20px;
+}
+
+.logo {
+  width: 128px;
+  height: 128px;
+}
 </style>

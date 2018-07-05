@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a class="button is-dark is-rounded" @click="log">Log</a>
+    <a class="button is-primary is-rounded" @click="log">Log</a>
   </div>
 </template>
 
