@@ -25,8 +25,8 @@ module.exports = {
   apollo: {
     clientConfigs: {
       default: {
-        httpEndpoint: `${process.env.PROTO || 'http'}://${process.env.SERVER_HOST || 'localhost'}:${process.env.PORT || 3000}/api/graphql`,
-        wsEndpoint: `${process.env.WS_PROTO || 'ws'}://${process.env.SERVER_HOST || 'localhost'}:${process.env.PORT || 3000}/api/subscriptions`
+        httpEndpoint: `${process.env.PROTO || 'http'}://${process.env.SERVER_HOST || 'localhost'}:${process.env.SERVER_PORT || 3000}/api/graphql`,
+        wsEndpoint: `${process.env.WS_PROTO || 'ws'}://${process.env.SERVER_HOST || 'localhost'}:${process.env.SERVER_PORT || 3000}/api/subscriptions`
       }
     }
   },
