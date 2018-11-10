@@ -40,7 +40,7 @@
     "subscriptions-transport-ws": "^0.9.15",
     "uuid": "^3.3.2",
     "vuedraggable": "^2.16.0",
-    "whatwg-fetch": "^3.0.0"
+    "whatwg-fetch": "2.0.4"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
@@ -60,7 +60,11 @@
     "vue-test-utils": "^1.0.0-beta.11"
   },
   "jest": {
-    "moduleFileExtensions": ["js", "json", "vue"],
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "vue"
+    ],
     "transform": {
       ".*\\.(vue)$": "<rootDir>/node_modules/vue-jest",
       "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
@@ -78,7 +82,11 @@
       "!**/*.config.js",
       "!.nuxt/**"
     ],
-    "setupFiles": ["<rootDir>/node_modules/regenerator-runtime/runtime"],
-    "coverageReporters": ["html"]
+    "setupFiles": [
+      "<rootDir>/node_modules/regenerator-runtime/runtime"
+    ],
+    "coverageReporters": [
+      "html"
+    ]
   }
 }
