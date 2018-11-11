@@ -4,22 +4,22 @@
       <p class="card-header-title">
         <span class="avator"> {{ authorInitial }} </span>
         {{ card.content }}
-        <a 
-          v-if="isLiked" 
-          class="thumbup" 
+        <a
+          v-if="isLiked"
+          class="thumbup"
           @click="$emit('unlike', card, index)">
           <b-icon icon="thumb-up" />
         </a>
-        <a 
-          v-else 
-          class="thumbup" 
+        <a
+          v-else
+          class="thumbup"
           @click="$emit('like', card)">
           <b-icon icon="thumb-up-outline" />
         </a>
         {{ card.like.length }}
       </p>
-      <a 
-        class="card-header-icon delete-link" 
+      <a
+        class="card-header-icon delete-link"
         @click="$emit('removeCard', card, index)">
         <span class="delete"/>
       </a>
