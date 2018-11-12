@@ -1,15 +1,16 @@
 import express from 'express'
 import session from 'express-session'
 import consola from 'consola'
+import { createServer } from 'http'
 import { Nuxt, Builder } from 'nuxt'
-import api from './api'
 import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
 import { Mockgoose } from 'mockgoose'
-import config from '../nuxt.config.js'
-import apolloServer from './graphql'
-import { boards, cards, lists } from '../__mock__/data'
 
+import api from './api'
+import config from '../nuxt.config.js'
+import server from './graphql'
+import { boards, cards, lists } from '../__mock__/data'
 import Board from './models/board'
 import Card from './models/card'
 import List from './models/list'
@@ -30,7 +31,7 @@ app.use(
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use('/api', api)
-apolloServer.applyMiddleware({ app })
+server.applyMiddleware({ app })
 
 // Import and Set Nuxt.js options
 config.dev = !(process.env.NODE_ENV === 'production')
@@ -67,11 +68,22 @@ async function start() {
 
   init_db(config.dev)
 
-  // Listen the server
-  app.listen(port, host)
-  consola.ready({
-    message: `Server listening on http://${host}:${port}`,
-    badge: true
+  const httpServer = createServer(app)
+  server.installSubscriptionHandlers(httpServer)
+  httpServer.listen(port, host, () => {
+    consola.ready({
+      message: `🚀 Server ready at http://localhost:${port}${
+        server.graphqlPath
+      }`,
+      badge: true
+    })
+    consola.ready({
+      message: `🚀 Subscriptions ready at ws://localhost:${port}${
+        server.subscriptionsPath
+      }`,
+      badge: true
+    })
   })
 }
+
 start()

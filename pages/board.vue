@@ -51,24 +51,7 @@ import List from '~/components/List.vue'
 
 export default {
   apollo: {
-    cardss: {
-      query: gql`
-        query lists($boardId: String!) {
-          lists(boardId: $boardId) {
-            id
-            order
-            boardId
-            listId
-            content
-            like
-            author
-          }
-        }
-      `,
-      variables() {
-        return { boardId: '1' }
-      }
-    }
+    // TODO: write apollo queries
   },
   components: {
     draggable,

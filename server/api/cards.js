@@ -56,7 +56,7 @@ router.post('/cards/:id/like', function(req, res, next) {
 /* unlike card.  */
 router.delete('/cards/:id/like', function(req, res, next) {
   Card.where({ id: req.params.id })
-    .update({ $pullAll: { like: req.session.authUser.username } })
+    .update({ $pullAll: { like: [req.session.authUser.username] } })
     .exec()
     .then(() => {
       return res.sendStatus(200)

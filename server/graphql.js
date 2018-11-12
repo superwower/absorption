@@ -18,14 +18,12 @@ const typeDefs = gql`
     id: String
     order: Int
     title: String
-    lists: [List!]!
   }
   type List {
     id: String
     order: Int
     boardId: String
     title: String
-    cards: [Card!]!
   }
   type Card {
     id: String

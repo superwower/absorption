@@ -57,10 +57,10 @@ module.exports = {
       default: {
         httpEndpoint: `${process.env.PROTO || 'http'}://${process.env
           .SERVER_HOST || 'localhost'}:${process.env.SERVER_PORT ||
+          3000}/graphql`,
+        wsEndpoint: `${process.env.WS_PROTO || 'ws'}://${process.env
+          .SERVER_HOST || 'localhost'}:${process.env.SERVER_PORT ||
           3000}/graphql`
-        // wsEndpoint: `${process.env.WS_PROTO || 'ws'}://${process.env
-        // .SERVER_HOST || 'localhost'}:${process.env.SERVER_PORT ||
-        // 3000}/api/subscriptions`
       }
     }
   },
