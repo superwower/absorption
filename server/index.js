@@ -4,16 +4,11 @@ import consola from 'consola'
 import { createServer } from 'http'
 import { Nuxt, Builder } from 'nuxt'
 import bodyParser from 'body-parser'
-import mongoose from 'mongoose'
-import { Mockgoose } from 'mockgoose'
 
 import api from './api'
 import config from '../nuxt.config.js'
 import server from './graphql'
-import { boards, cards, lists } from '../__mock__/data'
-import Board from './models/board'
-import Card from './models/card'
-import List from './models/list'
+import { init_db } from './lib/db'
 
 const app = express()
 const host = process.env.HOST || '127.0.0.1'
@@ -35,23 +30,6 @@ server.applyMiddleware({ app })
 
 // Import and Set Nuxt.js options
 config.dev = !(process.env.NODE_ENV === 'production')
-
-async function init_db(isDev = true) {
-  if (isDev) {
-    const mockgoose = new Mockgoose(mongoose)
-    const proxy = process.env.http_proxy
-    if (proxy) {
-      mockgoose.helper.setProxy(proxy)
-    }
-    await mockgoose.prepareStorage()
-  }
-  await mongoose.connect('mongodb://foobar/baz')
-  if (isDev) {
-    await Board.create(boards)
-    await Card.create(cards)
-    await List.create(lists)
-  }
-}
 
 async function start() {
   // Init Nuxt.js
