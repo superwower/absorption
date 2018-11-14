@@ -27,20 +27,6 @@
   </div>
 </template>
 
-<style>
-.thumbup {
-  padding-left: 10px;
-}
-
-.avator {
-  width: 30px;
-  border-radius: 2px 10px 2px;
-  text-align: center;
-  margin-right: 5px;
-  background: #bada55;
-}
-</style>
-
 <script>
 export default {
   props: ['card', 'index'],
@@ -54,3 +40,17 @@ export default {
   }
 }
 </script>
+
+<style>
+.thumbup {
+  padding-left: 10px;
+}
+
+.avator {
+  width: 30px;
+  border-radius: 2px 10px 2px;
+  text-align: center;
+  margin-right: 5px;
+  background: #bada55;
+}
+</style>

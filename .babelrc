@@ -1,7 +1,12 @@
 {
+  "presets": [
+    ["env", { "modules": false }]
+  ],
   "env": {
     "test": {
-      "presets": ["env"]
+      "presets": [
+        ["env", { "targets": { "node": "current" }}]
+      ]
     }
   }
 }
