@@ -41,6 +41,7 @@
     "whatwg-fetch": "2.0.4"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.2.3",
     "@vue/test-utils": "^1.0.0-beta.25",
     "babel-eslint": "^8.2.1",
     "babel-jest": "^23.6.0",
