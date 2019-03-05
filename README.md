@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/superwower/absorption.svg?style=svg)](https://circleci.com/gh/superwower/absorption)
+
 # absorption
 
 > Retrospective board
